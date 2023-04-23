@@ -7,14 +7,11 @@
 
     {{#each blogs as |blog|}}
     <article class="blog-post">
-      <h2 class="blog-post-title">{{title}}</h2>
-      <p class="blog-post-meta">{{date}} by <a href="#">{{firstname}}</a></p>
+      <h2 class="blog-post-title">{{blog.title}}</h2>
+      <p class="blog-post-meta">{{blog.date_created}} by <a href="/blog/{{blog.id}}">{{blog.user.username}}</a></p>
 
-      <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic
-        typography, lists, tables, images, code, and more are all supported as expected.</p>
+      <p>{{blog.content}}</p>
 
-      <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the other highly
-        repetitive body text used throughout.</p>
     </article>
     {{/each}}
 

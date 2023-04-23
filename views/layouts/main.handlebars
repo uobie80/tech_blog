@@ -24,6 +24,140 @@
       user-select: none;
     }
 
+    /* stylelint-disable selector-list-comma-newline-after */
+
+    .blog-header {
+      line-height: 1;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .blog-header-logo {
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif
+        /*rtl:Amiri, Georgia, "Times New Roman", serif*/
+      ;
+      font-size: 2.25rem;
+    }
+
+    .blog-header-logo:hover {
+      text-decoration: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif
+        /*rtl:Amiri, Georgia, "Times New Roman", serif*/
+      ;
+    }
+
+    .display-4 {
+      font-size: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .display-4 {
+        font-size: 3rem;
+      }
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-scroller .nav-link {
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      font-size: .875rem;
+    }
+
+    .card-img-right {
+      height: 100%;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .flex-auto {
+      flex: 0 0 auto;
+    }
+
+    .h-250 {
+      height: 250px;
+    }
+
+    @media (min-width: 768px) {
+      .h-md-250 {
+        height: 250px;
+      }
+    }
+
+    /* Pagination */
+    .blog-pagination {
+      margin-bottom: 4rem;
+    }
+
+    .blog-pagination>.btn {
+      border-radius: 2rem;
+    }
+
+    /* link hover effects */
+    .hover-effect:hover {
+      opacity: 0.5;
+    }
+
+    /* login page header background image*/
+    .blog-bg-img {
+      background: url('../images/tech-blog-img-03.png');
+
+    }
+
+    /*
+ * Blog posts
+ */
+    .blog-post {
+      margin-bottom: 4rem;
+    }
+
+    .blog-post-title {
+      margin-bottom: .25rem;
+      font-size: 2.5rem;
+    }
+
+    .blog-post-meta {
+      margin-bottom: 1.25rem;
+      color: #727272;
+    }
+
+    /*
+ * Footer
+ */
+    .blog-footer {
+      padding: 2.5rem 0;
+      color: #727272;
+      text-align: center;
+      background-color: #f9f9f9;
+      border-top: .05rem solid #e5e5e5;
+    }
+
+    .blog-footer p:last-child {
+      margin-bottom: 0;
+    }
+
     @media (min-width: 768px) {
       .bd-placeholder-img-lg {
         font-size: 3.5rem;
@@ -34,7 +168,7 @@
   <!-- Custom styles for this template -->
   <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="blog.css" rel="stylesheet">
+  <link href="/public/css/blog.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -44,35 +178,41 @@
       <div class="row flex-nowrap justify-content-end align-items-center">
 
         <div class="col-4 text-center">
-          <a class="blog-header-logo text-dark" href="#">Tech Blog</a>
+          <a class="blog-header-logo text-dark" href="/home">Tech Blog</a>
         </div>
+        {{#if logged_in}}
         <div class="col-4 d-flex justify-content-end align-items-center">
-          <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
         </div>
+        {{else}}
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          <a class="btn btn-sm btn-outline-secondary" href="/signup">Sign up</a>
+        </div>
+        {{/if}}
+
       </div>
     </header>
 
     <div class="nav-scroller py-1 mb-2">
       <nav class="nav d-flex justify-content-start">
-        <a class="p-2 link-secondary" href="#">Home</a>
-        <a class="p-2 link-secondary" href="#">Dashboard</a>
+        <a class="p-2 link-secondary" href="/home">Home</a>
+        <a class="p-2 link-secondary" href="/dashboard">Dashboard</a>
 
         {{#if logged_in}}
-        <a class="p-2 link-secondary" href="#">Logout</a>
+        <a class="p-2 link-secondary" id="logout" href="#">Logout</a>
         {{else}}
-        <a class="p-2 link-secondary" href="#">Login</a>
+        <a class=" p-2 link-secondary" href="/login">Login</a>
         {{/if}}
       </nav>
     </div>
   </div>
 
   <main class="container">
-    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark blog-bg-img">
       <div class="col-md-6 px-0">
-        <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-        <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently
-          about what’s most interesting in this post’s contents.</p>
-        <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+        <h1 class="display-4 fst-italic">News, Ideas, and Inspiration</h1>
+        <p class="lead my-3 fst-italic"><b>"Technology is best when it brings people together."</b></p>
+        <p><b>Matt Mullenweg, Social Media Entrepreneur.</b></p>
+
       </div>
     </div>
 
@@ -90,6 +230,7 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
   <!-- Render script for logged in users only -->
+
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
