@@ -1,17 +1,14 @@
 [
   {
-    "name": "Music Near Me",
-    "description": "A mobile app that will send you notifications whenever a concert is playing in your area.",
-    "needed_funding": 5000
+    "title": "Office 2013 support officially ends",
+    "content": "In a final goodbye notice, Microsoft marked the end of Office 2013's product life on Wednesday. Office 2013 fell out of \"extended support\" on April 11, 2023. That date marks the end of a 10-year product support phase, and it means that Microsoft has stopped issuing patches for the product, although the product may continue to work"
   },
   {
-    "name": "The Ultimate Tech Quiz",
-    "description": "A web app that will give users 10 new technical questions each day and track their progress in things like programming, cybersecurity, database architecture, and more!",
-    "needed_funding": 10000
+    "title": "Microsoft is restoring one of the most requested taskbar features, here is a quick look",
+    "content": "Many Windows 11 users miss the ability to ungroup apps, so Microsoft is finally working on restoring the much-requested feature."
   },
   {
-    "name": "Roll 'Em Up",
-    "description": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes.",
-    "needed_funding": 800
+    "title": "What if cloud data was stored on floppy disks?",
+    "content": "The largest cloud user in the study, Germany’s storage equivalent in floppy disks would reach a height of 440,396 km, that's 55,996km higher than the moon and over 5,500 times the cruising height of a 747 airliner."
   }
 ]

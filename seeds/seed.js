@@ -13,11 +13,23 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  for (const project of projectData) {
-    await Project.create({
-      ...project,
+  const blogs = [];
+
+  for (const blog of blogData) {
+  const blog = await Blog.create({
+      ...blog,
       user_id: users[Math.floor(Math.random() * users.length)].id,
     });
+    blogs.push(blog);
+  }
+
+  const idx = 0;
+  for (const comment of commentData){
+    await Comment.create({
+      ...comment,
+      blog_id: blogs[idx++].id,
+      user_id: users[Math.floor(Math.random() * users.length)].id,
+    })
   }
 
   process.exit(0);
