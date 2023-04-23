@@ -119,6 +119,44 @@ router.post('/logout', (req, res) => {
 
 });
 
+
+router.get('/', async (req, res) => {
+res.send("In user routes");
+});
+
+
+router.get('/signup', (req, res) => {
+
+  if (req.session.logged_in) {
+    res.redirect('/home');
+    return;
+  }
+
+  res.render('signup');
+});
+
+
+router.post('/signup', async (req, res) => {
+
+   console.log(req.body);
+
+  try {
+    const userData = await User.create(req.body);
+
+   req.session.save(() => {
+     req.session.user_id = userData.id;
+     req.session.firstname = userData.firstname;
+     req.session.lastname = userData.lastname;
+     req.session.logged_in = true;
+     res.status(200).json(userData);   
+   });
+  
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+});
+
 /*
 
 router.get('/project/:id', async (req, res) => {

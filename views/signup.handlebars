@@ -2,7 +2,7 @@
   Please Sign Up
 </h3>
 
-<form>
+<form class="signup-form">
   <div class="mb-3 col-md-3">
     <label for="InputFirstName1" class="form-label">First Name</label>
     <input type="text" class="form-control" id="InputFirstName1" aria-describedby="FirstNameHelp">
@@ -14,6 +14,11 @@
     <div id="LastNameHelp" class="form-text"></div>
   </div>
   <div class="mb-3 col-md-3">
+    <label for="InputEmail1" class="form-label">Email</label>
+    <input type="email" class="form-control" id="InputEmail1" aria-describedby="EmailHelp">
+    <div id="EmailHelp" class="form-text"></div>
+  </div>
+  <div class="mb-3 col-md-3">
     <label for="InputUsername1" class="form-label">Username</label>
     <input type="text" class="form-control" id="InputUsername1" aria-describedby="UserameHelp">
     <div id="UsernameHelp" class="form-text"></div>
@@ -23,9 +28,11 @@
     <input type="password" class="form-control" id="exampleInputPassword1">
   </div>
   <div class="mb-3">
-    <a class="p-2 link-dark hover-effect" href="#">Login Instead</a>
+    <a class="p-2 link-dark hover-effect" href="/login">Login Instead</a>
   </div>
   <div class="mb-3">
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
+
+<script src="/js/signup.js"></script>
