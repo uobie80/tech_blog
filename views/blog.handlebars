@@ -1,0 +1,22 @@
+{{#if logged_in}}
+<h4> Welcome {{firstname}} {{lastname}}!</h4>
+{{/if}}
+
+<div class="row g-5">
+  <div class="col-md-12">
+    <article class="blog-post">
+      <h2 class="blog-post-title">{{blog.title}}</h2>
+      <p class="blog-post-meta">{{blog.date_created}} by <a href="/blog/{{blog.id}}">{{blog.user.username}}</a></p>
+
+      <p>{{blog.content}}</p>
+
+    </article>
+
+  </div>
+</div>
+
+<form>
+  <div class="mb-3">
+    <a href="/add-comment" class="btn btn-primary view-details">Add Comment</a>
+  </div>
+</form>
