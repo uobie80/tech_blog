@@ -2,19 +2,22 @@
   {
     "firstname": "John",
     "lastname": "Doe",
+    "username": "jdoe",
     "email": "jdoe@hotmail.com",
-    "password": "password12345"
+    "password": "welcome123"
   },
   {
     "firstname": "Jane",
     "lastname": "Doe",
+    "username": "jdoe02",
     "email": "jane.doe@gmail.com",
-    "password": "password12345"
+    "password": "welcome123"
   },
   {
     "firstname": "Amiko",
     "lastname": "Dozie",
+    "username": "adozie",
     "email": "amiko.dozie@aol.com",
-    "password": "password12345"
+    "password": "welcome123"
   }
 ]
