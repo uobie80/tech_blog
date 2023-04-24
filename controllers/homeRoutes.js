@@ -281,7 +281,7 @@ router.put('/dashboard/blog/update', async (req, res) => {
 
   
     req.session.save(() => {
-        req.session.blogId = req.params.id
+        req.session.blogId = req.body.blogId
       });
 
    res.status(200).json(blogData); 
@@ -291,7 +291,24 @@ router.put('/dashboard/blog/update', async (req, res) => {
   }
 });
 
+router.delete('/dashboard/blog/update', async (req, res) => {
+ 
+   try {
+    const blogData = await Blog.destroy({
+  where: {
+    id: req.body.blogId
+  }
+});
 
+  
+   
+
+   res.status(200).json(blogData); 
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 /*
 
 router.get('/project/:id', async (req, res) => {
