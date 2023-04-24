@@ -8,12 +8,10 @@ const updateHandler = async (event) => {
   const blogIdEl1 = document.querySelector('#blogId');
   const blogId = blogIdEl1.getAttribute('data-id');
 
-  //title.value = title.textContent;
-  //content.value = content.textContent;
 
   if (title && content) {
   
-    const response = await fetch('/dashboard/blog/update', {
+    const response = await fetch('/dashboard/blog/create', {
       method: 'PUT',
       body: JSON.stringify({ title, content, blogId }),
       headers: { 'Content-Type': 'application/json' },
