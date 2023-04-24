@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User, Blog } = require('../models');
+const req = require('express/lib/request');
+const { User, Blog, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -22,7 +23,8 @@ router.get('/', async (req, res) => {
       blogs, 
       logged_in: req.session.logged_in,
       firstname: req.session.firstname,
-      lastname: req.session.lastname
+      lastname: req.session.lastname,
+      username: req.session.username
     });
   } catch (err) {
     res.status(500).json(err);
@@ -38,18 +40,40 @@ router.get('/blog/:id', withAuth, async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['username','user_id'],
+          attributes: ['username','id'],
         },
       ],
     });
 
-    const blog = blogData.get({ plain: true });
 
-    res.render('add-comment', {
+     const commentsData = await Comment.findAll({
+            where: {
+                     blog_id: req.params.id
+                   },
+                    include: [
+        {
+          model: User,
+          attributes: ['username','id'],
+        },
+      ],
+      });
+     
+        // Serialize data so the template can read it
+        const comments = commentsData.map((comment) => comment.get({ plain: true }));
+  
+    const blog = blogData.get({ plain: true });
+    console.log(comments);
+    res.render('blog', {
       ...blog,
-      logged_in: req.session.logged_in
+      comments,
+      logged_in: req.session.logged_in,
+      firstname: req.session.firstname,
+      lastname: req.session.lastname,
+      username: req.session.username,
+      blogId: req.params.id
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -94,6 +118,7 @@ router.post('/login', async (req, res) => {
         req.session.firstname = userData.firstname;
         req.session.lastname = userData.lastname;
         req.session.logged_in = true;
+        req.session.username = req.body.username;
         res.status(200).json(userData);   
       });
 
@@ -147,6 +172,7 @@ router.post('/signup', async (req, res) => {
      req.session.user_id = userData.id;
      req.session.firstname = userData.firstname;
      req.session.lastname = userData.lastname;
+     req.session.username = userData.username;
      req.session.logged_in = true;
      res.status(200).json(userData);   
    });
@@ -156,6 +182,33 @@ router.post('/signup', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+router.post('/add-comment', async (req, res) => {
+
+ const data =  {...req.body, 
+    blog_id: req.session.blogId
+  };
+
+  try {
+    const commentData = await Comment.create(data);
+
+      const comment = commentData.get({ plain: true });
+
+ 
+
+   req.session.save(() => {
+     req.session.comment_id = commentData.id;
+     req.session.logged_in = true;
+     res.status(200).json(commentData);   
+   });
+  
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+});
+
+
 
 /*
 

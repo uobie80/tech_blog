@@ -5,18 +5,42 @@
 <div class="row g-5">
   <div class="col-md-12">
     <article class="blog-post">
-      <h2 class="blog-post-title">{{blog.title}}</h2>
-      <p class="blog-post-meta">{{blog.date_created}} by <a href="/blog/{{blog.id}}">{{blog.user.username}}</a></p>
+      <h2 class="blog-post-title">{{title}}</h2>
+      <p class="blog-post-meta">{{date_created}} by <a href="/blog/{{id}}">{{user.username}}</a></p>
 
-      <p>{{blog.content}}</p>
+      <p>{{content}}</p>
 
     </article>
+
+    <h3 class="pb-4 mb-4 fst-italic border-bottom">
+      Comments
+    </h3>
+
+
+    {{#each comments as |comment|}}
+    <article class="blog-post">
+      <p class="blog-post-meta">{{comment.date_created}} by {{comment.user.username}}</p>
+      <p>{{comment.comment}}</p>
+    </article>
+    {{/each}}
 
   </div>
 </div>
 
-<form>
-  <div class="mb-3">
-    <a href="/add-comment" class="btn btn-primary view-details">Add Comment</a>
+
+
+
+
+
+<form class="add-comment-form">
+  <div className="mb-3">
+    <label For="contentTextarea1" className="form-label">Comment</label>
+    <textarea class="form-control" id="contentTextarea1" rows="5"></textarea>
+  </div>
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-start">
+
+      <button type="submit" class="p-2 link-secondary">Add Comment</button>
+    </nav>
   </div>
 </form>

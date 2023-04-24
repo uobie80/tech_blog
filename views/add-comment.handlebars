@@ -2,13 +2,31 @@
   Home > Add Comment
 </h3>
 
-<form>
+
+{{#if logged_in}}
+<h4> Welcome {{firstname}} {{lastname}}!</h4>
+{{/if}}
+
+<div class="row g-5">
+  <div class="col-md-12">
+    <article class="blog-post">
+      <h2 class="blog-post-title">{{title}}</h2>
+      <p class="blog-post-meta">{{date_created}} by <a href="/blog/{{id}}">{{user.username}}</a></p>
+
+      <p>{{content}}</p>
+
+    </article>
+
+  </div>
+</div>
+
+<form class="add-comment-form">
   <div className="mb-3">
     <label For="contentTextarea1" className="form-label">Comment</label>
     <textarea class="form-control" id="contentTextarea1" rows="5"></textarea>
   </div>
 
   <div class="mb-3">
-    <a href="/post-comment" class="btn btn-primary view-details">Submit</a>
+    <a href="#" class="btn btn-primary">Submit</a>
   </div>
 </form>
