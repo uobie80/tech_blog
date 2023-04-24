@@ -46,7 +46,7 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 
 ## Page Mock-Up
 The following is a mock up of the tech blog site:
-![Tech Blog](assets/images/vlt-mock-up-page.png?raw=true "Tech Blog Site")
+![Tech Blog](./images/tech-blog.png?raw=true "Tech Blog Site")
 
 
 ## Link to Deployed App
