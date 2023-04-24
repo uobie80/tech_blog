@@ -51,4 +51,4 @@ The following is a mock up of the tech blog site:
 
 ## Link to Deployed App
 The following link to my tech blog site::  
- - [My tech Blog]()
+ - [My tech Blog](https://uchenna-tech-blog.herokuapp.com/)
