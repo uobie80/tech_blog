@@ -1,17 +1,13 @@
-<h3 class="pb-4 mb-4 fst-italic border-bottom">
-  Dashboard
-</h3>
-
 {{#if logged_in}}
 {{#each blogs as |blog|}}
 
 <div class="mb-3">
-  <a href="/update-post/{{title.id}}" class="btn btn-primary view-details">{{title}}</a>
+  <a href="/update-post/{{title.id}}" class="btn btn-primary">{{title}}</a>
 </div>
 {{/each}}
 {{/if}}
 <form>
   <div class="mb-3">
-    <a href="/create-post" class="btn btn-primary view-details">+New Post</a>
+    <a href="/create-post" class="btn btn-primary">+New Post</a>
   </div>
 </form>

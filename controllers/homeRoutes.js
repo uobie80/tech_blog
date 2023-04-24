@@ -59,10 +59,15 @@ router.get('/blog/:id', withAuth, async (req, res) => {
       });
      
         // Serialize data so the template can read it
-        const comments = commentsData.map((comment) => comment.get({ plain: true }));
+    const comments = commentsData.map((comment) => comment.get({ plain: true }));
   
     const blog = blogData.get({ plain: true });
     console.log(comments);
+
+    req.session.save(() => {
+        req.session.blogId = req.params.id
+      });
+
     res.render('blog', {
       ...blog,
       comments,
@@ -117,6 +122,7 @@ router.post('/login', async (req, res) => {
       req.session.save(() => {
         req.session.firstname = userData.firstname;
         req.session.lastname = userData.lastname;
+        req.session.user_id = userData.id;
         req.session.logged_in = true;
         req.session.username = req.body.username;
         res.status(200).json(userData);   
@@ -183,21 +189,23 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.post('/add-comment', async (req, res) => {
+router.post('/addcomment', async (req, res) => {
 
- const data =  {...req.body, 
-    blog_id: req.session.blogId
+  console.log(req.session.user_id);
+   console.log(req.body.comment);
+    console.log(req.session.blogId);
+
+ const data =  {comment: req.body.comment, 
+    blog_id: req.session.blogId,
+    user_id: req.session.user_id
   };
-
+   console.log(data);
   try {
-    const commentData = await Comment.create(data);
+  const commentData = await Comment.create(data);
 
-      const comment = commentData.get({ plain: true });
-
- 
 
    req.session.save(() => {
-     req.session.comment_id = commentData.id;
+
      req.session.logged_in = true;
      res.status(200).json(commentData);   
    });
