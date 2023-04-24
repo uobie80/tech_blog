@@ -216,6 +216,80 @@ router.post('/addcomment', async (req, res) => {
   }
 });
 
+router.get('/dashboard', withAuth, async (req, res) => {
+  try {
+ 
+    const blogData = await Blog.findAll({
+      where: {
+
+        user_id: req.session.user_id
+      },
+    });
+
+    // Serialize data so the template can read it
+    const blogs = blogData.map((blog) => blog.get({ plain: true }));
+     console.log(blogs);
+    // Pass serialized data and session flag into template
+    res.render('dashboard', { 
+      blogs, 
+      logged_in: req.session.logged_in,
+      firstname: req.session.firstname,
+      lastname: req.session.lastname,
+      username: req.session.username
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/dashboard/blog/:id', async (req, res) => {
+ 
+   try {
+    const blogData = await Blog.findByPk(req.params.id);
+
+  
+    const blog = blogData.get({ plain: true });
+
+    req.session.save(() => {
+        req.session.blogId = blogData.id;
+      });
+
+    res.render('edit', {
+      ...blog,
+      logged_in: req.session.logged_in,
+      firstname: req.session.firstname,
+      lastname: req.session.lastname,
+      username: req.session.username,
+      blogId: req.params.id
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
+
+router.put('/dashboard/blog/update', async (req, res) => {
+ 
+   try {
+    const blogData = await Blog.update({title: req.body.title, content: req.body.content},
+       {
+  where: {
+    id: req.body.blogId
+  }});
+
+  
+    req.session.save(() => {
+        req.session.blogId = req.params.id
+      });
+
+   res.status(200).json(blogData); 
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 
 /*

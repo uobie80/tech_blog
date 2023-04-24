@@ -1,0 +1,34 @@
+
+const updateHandler = async (event) => {
+  event.preventDefault();
+
+
+  const title = document.querySelector('#titleTextarea1').value.trim();
+  const content = document.querySelector('#contentTextarea1').value.trim();
+  const blogIdEl1 = document.querySelector('#blogId');
+  const blogId = blogIdEl1.getAttribute('data-id');
+
+  //title.value = title.textContent;
+  //content.value = content.textContent;
+
+  if (title && content) {
+  
+    const response = await fetch('/dashboard/blog/update', {
+      method: 'PUT',
+      body: JSON.stringify({ title, content, blogId }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+    
+      document.location.replace('/dashboard');
+    } else {
+      alert(response.statusText);
+    }
+  }
+};
+
+
+document
+  .querySelector('#updatePost')
+  .addEventListener('click', updateHandler);
