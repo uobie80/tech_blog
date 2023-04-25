@@ -11,7 +11,7 @@ const updateHandler = async (event) => {
 
   if (title && content) {
   
-    const response = await fetch('/dashboard/blog/create', {
+    const response = await fetch('/dashboard/blog/update', {
       method: 'PUT',
       body: JSON.stringify({ title, content, blogId }),
       headers: { 'Content-Type': 'application/json' },
